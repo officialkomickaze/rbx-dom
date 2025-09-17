@@ -7,7 +7,7 @@ use serde::{Deserialize, Deserializer, Serialize, Serializer};
 /// the difference that `Default` is a variant here, instead of a hidden state
 /// that `PhysicalProperties` can have.
 ///
-/// [PhysicalProperties]: https://developer.roblox.com/en-us/api-reference/datatype/PhysicalProperties
+/// [PhysicalProperties]: https://https://create.roblox.com/docs/reference/engine/datatypes/PhysicalProperties
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub enum PhysicalProperties {
     Default,
@@ -23,9 +23,9 @@ impl From<CustomPhysicalProperties> for PhysicalProperties {
 /// Custom physics properties that can be given to parts.
 ///
 /// Documentation for what these do can be found on the
-/// [`PhysicalProperties`][PhysicalProperties] DevHub documentation.
+/// [`PhysicalProperties`][PhysicalProperties] Creator Hub documentation.
 ///
-/// [PhysicalProperties]: https://developer.roblox.com/en-us/api-reference/datatype/PhysicalProperties
+/// [PhysicalProperties]: https://create.roblox.com/docs/reference/engine/datatypes/PhysicalProperties
 #[derive(Debug, Clone, Copy, PartialEq)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 #[cfg_attr(feature = "serde", serde(rename_all = "camelCase"))]
@@ -35,6 +35,7 @@ pub struct CustomPhysicalProperties {
     pub elasticity: f32,
     pub friction_weight: f32,
     pub elasticity_weight: f32,
+    pub acoustic_absorption: f32,
 }
 
 #[cfg(feature = "serde")]
@@ -142,10 +143,11 @@ mod serde_test {
             elasticity: 0.0,
             elasticity_weight: 5.0,
             friction_weight: 6.0,
+            acoustic_absorption: 1.0,
         });
 
         let ser = serde_json::to_string(&custom).unwrap();
-        assert_eq!(ser, "{\"density\":1.0,\"friction\":0.5,\"elasticity\":0.0,\"frictionWeight\":6.0,\"elasticityWeight\":5.0}");
+        assert_eq!(ser, "{\"density\":1.0,\"friction\":0.5,\"elasticity\":0.0,\"frictionWeight\":6.0,\"elasticityWeight\":5.0,\"acousticAbsorption\":1.0}");
 
         let de: PhysicalProperties = serde_json::from_str(&ser).unwrap();
         assert_eq!(de, custom);
@@ -169,6 +171,7 @@ mod serde_test {
             elasticity: 0.0,
             elasticity_weight: 5.0,
             friction_weight: 6.0,
+            acoustic_absorption: 1.0,
         });
 
         let ser = bincode::serialize(&custom).unwrap();

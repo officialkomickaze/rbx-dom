@@ -175,6 +175,7 @@ impl ValuesSubcommand {
                 elasticity: 0.0,
                 friction_weight: 50.0,
                 elasticity_weight: 25.0,
+                acoustic_absorption: 1.0,
             })
             .into(),
         );

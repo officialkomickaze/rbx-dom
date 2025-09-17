@@ -1182,6 +1182,7 @@ rbx-dom may require changes to fully support this property. Please open an issue
                                     elasticity: chunk.read_le_f32()?,
                                     friction_weight: chunk.read_le_f32()?,
                                     elasticity_weight: chunk.read_le_f32()?,
+                                    acoustic_absorption: chunk.read_le_f32()?,
                                 },
                             ))
                         } else {

@@ -609,6 +609,7 @@ impl DecodedValues {
                             elasticity: reader.read_le_f32().unwrap(),
                             friction_weight: reader.read_le_f32().unwrap(),
                             elasticity_weight: reader.read_le_f32().unwrap(),
+                            acoustic_absorption: reader.read_le_f32().unwrap(),
                         }))
                     } else {
                         values.push(PhysicalProperties::Default)

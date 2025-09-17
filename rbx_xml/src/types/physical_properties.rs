@@ -21,6 +21,7 @@ impl XmlType for PhysicalProperties {
                 writer.write_value_in_tag(&properties.elasticity, "Elasticity")?;
                 writer.write_value_in_tag(&properties.friction_weight, "FrictionWeight")?;
                 writer.write_value_in_tag(&properties.elasticity_weight, "ElasticityWeight")?;
+                writer.write_value_in_tag(&properties.acoustic_absorption, "AcousticAbsorption")?;
             }
             PhysicalProperties::Default => {
                 writer.write_value_in_tag(&false, "CustomPhysics")?;
@@ -39,6 +40,7 @@ impl XmlType for PhysicalProperties {
             let elasticity: f32 = reader.read_value_in_tag("Elasticity")?;
             let friction_weight: f32 = reader.read_value_in_tag("FrictionWeight")?;
             let elasticity_weight: f32 = reader.read_value_in_tag("ElasticityWeight")?;
+            let acoustic_absorption: f32 = reader.read_value_in_tag("AcousticAbsorption")?;
 
             Ok(PhysicalProperties::Custom(CustomPhysicalProperties {
                 density,
@@ -46,6 +48,7 @@ impl XmlType for PhysicalProperties {
                 elasticity,
                 friction_weight,
                 elasticity_weight,
+                acoustic_absorption,
             }))
         } else {
             Ok(PhysicalProperties::Default)
@@ -72,6 +75,7 @@ mod test {
             elasticity: 1.5,
             friction_weight: 2.0,
             elasticity_weight: 2.5,
+            acoustic_absorption: 1.0,
         }));
     }
 
@@ -98,6 +102,7 @@ mod test {
                     <Elasticity>1.5</Elasticity>
                     <FrictionWeight>2</FrictionWeight>
                     <ElasticityWeight>2.5</ElasticityWeight>
+                    <AcousticAbsorption>1</AcousticAbsorption>
                 </PhysicalProperties>
             "#,
             &PhysicalProperties::Custom(CustomPhysicalProperties {
@@ -106,6 +111,7 @@ mod test {
                 elasticity: 1.5,
                 friction_weight: 2.0,
                 elasticity_weight: 2.5,
+                acoustic_absorption: 1.0,
             }),
         );
     }
@@ -133,6 +139,7 @@ mod test {
                     <Elasticity>1.5</Elasticity>
                     <FrictionWeight>2</FrictionWeight>
                     <ElasticityWeight>2.5</ElasticityWeight>
+                    <AcousticAbsorption>1</AcousticAbsorption>
                 </PhysicalProperties>
             "#,
             &PhysicalProperties::Custom(CustomPhysicalProperties {
@@ -141,6 +148,7 @@ mod test {
                 elasticity: 1.5,
                 friction_weight: 2.0,
                 elasticity_weight: 2.5,
+                acoustic_absorption: 1.0,
             }),
         );
     }
